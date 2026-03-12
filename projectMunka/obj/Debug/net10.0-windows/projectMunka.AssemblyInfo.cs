@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("projectMunka")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+417c42133e22f0f297ce94556fdad5e838524d1a")]
 [assembly: System.Reflection.AssemblyProductAttribute("projectMunka")]
 [assembly: System.Reflection.AssemblyTitleAttribute("projectMunka")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\projectMunka.csproj",
+      "projectUniqueName": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\projectMunka.csproj",
       "projectName": "projectMunka",
-      "projectPath": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\projectMunka.csproj",
+      "projectPath": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\projectMunka.csproj",
       "packagesPath": "C:\\Users\\suli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\obj\\",
+      "outputPath": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -76,7 +76,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
