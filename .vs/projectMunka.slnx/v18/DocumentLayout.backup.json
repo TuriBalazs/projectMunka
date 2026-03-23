@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\suli\\source\\repos\\projectMunka\\",
+  "WorkspaceRootPath": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|c:\\users\\suli\\source\\repos\\projectmunka\\projectmunka\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|c:\\users\\suli\\documents\\github\\projectmunka\\projectmunka\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|solutionrelative:projectmunka\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|c:\\users\\suli\\source\\repos\\projectmunka\\projectmunka\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|c:\\users\\suli\\documents\\github\\projectmunka\\projectmunka\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{124CFECC-B014-B79B-6982-B69A8E372EA8}|projectMunka\\projectMunka.csproj|solutionrelative:projectmunka\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,19 +18,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\MainWindow.xaml",
               "RelativeDocumentMoniker": "projectMunka\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\MainWindow.xaml",
               "RelativeToolTip": "projectMunka\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-03-10T11:57:21.825Z",
@@ -40,13 +36,17 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "projectMunka\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\suli\\source\\repos\\projectMunka\\projectMunka\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\suli\\Documents\\GitHub\\projectMunka\\projectMunka\\MainWindow.xaml.cs",
               "RelativeToolTip": "projectMunka\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-10T11:57:18.027Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
