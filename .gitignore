@@ -1,0 +1,16 @@
+## .NET / Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.userossx
+*.sln.docstates
+.vs/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Python
+__pycache__/
+*.pyc

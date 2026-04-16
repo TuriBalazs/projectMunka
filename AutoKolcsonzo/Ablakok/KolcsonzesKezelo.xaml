@@ -1,0 +1,145 @@
+<!--
+    KolcsonzesKezelo.xaml - A kölcsönzések kezelésére szolgáló ablak.
+    Felépítése:
+    - Felső rész: Keresés sáv (mező kiválasztás, keresőszöveg, gombok)
+    - Középső rész: DataGrid a kölcsönzések listájával (JOIN-nal az autó és ügyfél neveivel)
+    - Alsó rész: Adatbeviteli űrlap ComboBox-okkal (autó és ügyfél kiválasztás),
+      DatePicker-ekkel (dátumok) és CRUD gombok
+    A felhasználó itt tud kölcsönzéseket hozzáadni, módosítani, törölni és keresni.
+-->
+<Window x:Class="AutoKolcsonzo.Ablakok.KolcsonzesKezelo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kölcsönzések kezelése"
+        Height="750" Width="1050"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid Margin="10">
+        <!-- Három fő sor: keresés, táblázat, űrlap -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============================================================ -->
+        <!-- KERESÉS SÁV: Szűrés mező és szöveg alapján                  -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Keresés" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <!-- Keresési mező kiválasztása -->
+                <TextBlock Text="Keresés mezője:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox Name="keresesiMezoComboBox" Width="140">
+                    <ComboBoxItem Content="Autó neve" Tag="AutoNev" IsSelected="True"/>
+                    <ComboBoxItem Content="Ügyfél neve" Tag="UgyfelNev"/>
+                    <ComboBoxItem Content="Állapot" Tag="Allapot"/>
+                </ComboBox>
+
+                <!-- Keresőszöveg beviteli mező -->
+                <TextBlock Text="Keresőszöveg:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <TextBox Name="keresoszovegTextBox" Width="200"/>
+
+                <!-- Keresés és visszaállítás gombok -->
+                <Button Content="Keresés" Click="KeresesGomb_Click" MinWidth="80"/>
+                <Button Content="Összes mutatása" Click="OsszesGomb_Click" MinWidth="110"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- ============================================================ -->
+        <!-- ADATTÁBLÁZAT: A kölcsönzések listájának megjelenítése        -->
+        <!-- ============================================================ -->
+        <DataGrid Name="kolcsonzesekDataGrid" Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="KolcsonzesekDataGrid_SelectionChanged"
+                  Margin="0,5,0,5"
+                  AlternatingRowBackground="#F5F5F5"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <!-- Az oszlopok a Kolcsonzes modell tulajdonságaihoz vannak kötve -->
+                <!-- Az AutoNev és UgyfelNev a JOIN lekérdezésből származik -->
+                <DataGridTextColumn Header="Azonosító" Binding="{Binding KolcsonzesId}" Width="80"/>
+                <DataGridTextColumn Header="Autó" Binding="{Binding AutoNev}" Width="200"/>
+                <DataGridTextColumn Header="Ügyfél" Binding="{Binding UgyfelNev}" Width="150"/>
+                <DataGridTextColumn Header="Kezdő dátum" Binding="{Binding KezdoDatum, StringFormat=yyyy.MM.dd}" Width="110"/>
+                <DataGridTextColumn Header="Vég dátum" Binding="{Binding VegDatum, StringFormat=yyyy.MM.dd}" Width="110"/>
+                <DataGridTextColumn Header="Összeg (Ft)" Binding="{Binding Osszeg}" Width="100"/>
+                <DataGridTextColumn Header="Állapot" Binding="{Binding Allapot}" Width="90"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- ============================================================ -->
+        <!-- ADATBEVITELI ŰRLAP: Kölcsönzés adatainak bevitele/módosítása -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Kölcsönzés adatai" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Első sor: Autó és Ügyfél kiválasztás (legördülő listákkal) -->
+                <TextBlock Text="Autó:" Grid.Row="0" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <ComboBox Name="autoComboBox" Grid.Row="0" Grid.Column="1"
+                          Margin="0,0,15,5"
+                          SelectionChanged="AutoComboBox_SelectionChanged"/>
+
+                <TextBlock Text="Ügyfél:" Grid.Row="0" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <ComboBox Name="ugyfelComboBox" Grid.Row="0" Grid.Column="3"
+                          Margin="0,0,0,5"/>
+
+                <!-- Második sor: Kezdő dátum és Vég dátum (dátumválasztókkal) -->
+                <TextBlock Text="Kezdő dátum:" Grid.Row="1" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <DatePicker Name="kezdoDatumPicker" Grid.Row="1" Grid.Column="1"
+                            Margin="0,0,15,5"
+                            SelectedDateChanged="DatumValtozas"/>
+
+                <TextBlock Text="Vég dátum:" Grid.Row="1" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <DatePicker Name="vegDatumPicker" Grid.Row="1" Grid.Column="3"
+                            Margin="0,0,0,5"
+                            SelectedDateChanged="DatumValtozas"/>
+
+                <!-- Harmadik sor: Összeg és Állapot -->
+                <TextBlock Text="Összeg (Ft):" Grid.Row="2" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="osszegTextBox" Grid.Row="2" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="10"/>
+
+                <TextBlock Text="Állapot:" Grid.Row="2" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <ComboBox Name="allapotComboBox" Grid.Row="2" Grid.Column="3"
+                          Margin="0,0,0,5">
+                    <!-- A kölcsönzés lehetséges állapotai -->
+                    <ComboBoxItem Content="Aktív" IsSelected="True"/>
+                    <ComboBoxItem Content="Lezárt"/>
+                </ComboBox>
+
+                <!-- Negyedik sor: CRUD műveleti gombok -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                            Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="0,10,0,0">
+                    <Button Content="Új hozzáadása" Click="HozzaadasGomb_Click"/>
+                    <Button Content="Módosítás" Click="ModositasGomb_Click"/>
+                    <Button Content="Törlés" Click="TorlesGomb_Click"/>
+                    <Button Content="Mezők törlése" Click="MezokTorleseGomb_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

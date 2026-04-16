@@ -1,0 +1,99 @@
+<!--
+    MainWindow.xaml - Az alkalmazás főablaka.
+    A felső részén menüsor és eszköztár található, alul állapotsor,
+    középen pedig egy üdvözlő képernyő jelenik meg.
+    A menüből és az eszköztárból érhetők el az autók, ügyfelek
+    és kölcsönzések kezelő ablakai.
+-->
+<Window x:Class="AutoKolcsonzo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Autokölcsönzö Rendszer"
+        Height="600" Width="950"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+
+    <DockPanel>
+        <!-- ============================================================ -->
+        <!-- MENÜSOR: Az alkalmazás fő navigációs menüje                  -->
+        <!-- ============================================================ -->
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0">
+            <!-- Fájl menü: alkalmazás bezárása -->
+            <MenuItem Header="_Fájl">
+                <MenuItem Header="_Kilépés" Click="KilepesMenupont_Click"
+                          InputGestureText="Alt+F4"/>
+            </MenuItem>
+
+            <!-- Kezelés menü: entitások kezelése -->
+            <MenuItem Header="_Kezelés">
+                <MenuItem Header="_Autók kezelése" Click="AutokMenupont_Click"
+                          InputGestureText="Ctrl+1"/>
+                <MenuItem Header="_Ügyfelek kezelése" Click="UgyfelekMenupont_Click"
+                          InputGestureText="Ctrl+2"/>
+                <MenuItem Header="_Kölcsönzések kezelése" Click="KolcsonzesekMenupont_Click"
+                          InputGestureText="Ctrl+3"/>
+            </MenuItem>
+
+            <!-- Súgó menü: alkalmazás információk -->
+            <MenuItem Header="_Súgó">
+                <MenuItem Header="_Névjegy" Click="NevjegyMenupont_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- ============================================================ -->
+        <!-- ESZKÖZTÁR: Gyorsgombok a legfontosabb funkciókhoz            -->
+        <!-- ============================================================ -->
+        <ToolBarTray DockPanel.Dock="Top" Background="#FAFAFA">
+            <ToolBar Band="0" BandIndex="0">
+                <Button Content="Autók" Click="AutokMenupont_Click"
+                        ToolTip="Autók kezelése" Padding="10,4" MinWidth="0"/>
+                <Button Content="Ügyfelek" Click="UgyfelekMenupont_Click"
+                        ToolTip="Ügyfelek kezelése" Padding="10,4" MinWidth="0"/>
+                <Button Content="Kölcsönzések" Click="KolcsonzesekMenupont_Click"
+                        ToolTip="Kölcsönzések kezelése" Padding="10,4" MinWidth="0"/>
+                <Separator/>
+                <Button Content="Kilépés" Click="KilepesMenupont_Click"
+                        ToolTip="Alkalmazás bezárása" Padding="10,4" MinWidth="0"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- ============================================================ -->
+        <!-- ÁLLAPOTSOR: Az alkalmazás aktuális állapotát mutatja          -->
+        <!-- ============================================================ -->
+        <StatusBar DockPanel.Dock="Bottom" Background="#E8E8E8">
+            <StatusBarItem>
+                <TextBlock Name="allapotSzoveg" Text="Készenlét"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- ============================================================ -->
+        <!-- FŐ TARTALOM: Üdvözlő képernyő                               -->
+        <!-- ============================================================ -->
+        <Grid Background="#FDFDFD">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <!-- Alkalmazás címe -->
+                <TextBlock Text="Autokölcsönzö Rendszer"
+                           FontSize="36" FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Foreground="#2C3E50"
+                           Margin="0,0,0,15"/>
+
+                <!-- Alcím -->
+                <TextBlock Text="Autók, ügyfelek és kölcsönzések kezelése"
+                           FontSize="16"
+                           HorizontalAlignment="Center"
+                           Foreground="#7F8C8D"
+                           Margin="0,0,0,30"/>
+
+                <!-- Elválasztó vonal -->
+                <Separator Width="300" Margin="0,0,0,30"/>
+
+                <!-- Használati útmutató -->
+                <TextBlock Text="Válasszon a menüből vagy az eszköztárból!"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           Foreground="#95A5A6"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

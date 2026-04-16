@@ -1,0 +1,136 @@
+<!--
+    AutoKezelo.xaml - Az autók kezelésére szolgáló ablak.
+    Felépítése:
+    - Felső rész: Keresés sáv (mező kiválasztás, keresőszöveg, gombok)
+    - Középső rész: DataGrid az autók listájával
+    - Alsó rész: Adatbeviteli űrlap és CRUD gombok
+    A felhasználó itt tud autókat hozzáadni, módosítani, törölni és keresni.
+-->
+<Window x:Class="AutoKolcsonzo.Ablakok.AutoKezelo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Autók kezelése"
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid Margin="10">
+        <!-- Három fő sor: keresés, táblázat, űrlap -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============================================================ -->
+        <!-- KERESÉS SÁV: Szűrés mező és szöveg alapján                  -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Keresés" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <!-- Keresési mező kiválasztása -->
+                <TextBlock Text="Keresés mezője:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox Name="keresesiMezoComboBox" Width="130">
+                    <ComboBoxItem Content="Rendszám" Tag="Rendszam" IsSelected="True"/>
+                    <ComboBoxItem Content="Márka" Tag="Marka"/>
+                    <ComboBoxItem Content="Típus" Tag="Tipus"/>
+                </ComboBox>
+
+                <!-- Keresőszöveg beviteli mező -->
+                <TextBlock Text="Keresőszöveg:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <TextBox Name="keresoszovegTextBox" Width="200"/>
+
+                <!-- Keresés és visszaállítás gombok -->
+                <Button Content="Keresés" Click="KeresesGomb_Click" MinWidth="80"/>
+                <Button Content="Összes mutatása" Click="OsszesGomb_Click" MinWidth="110"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- ============================================================ -->
+        <!-- ADATTÁBLÁZAT: Az autók listájának megjelenítése              -->
+        <!-- ============================================================ -->
+        <DataGrid Name="autokDataGrid" Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="AutokDataGrid_SelectionChanged"
+                  Margin="0,5,0,5"
+                  AlternatingRowBackground="#F5F5F5"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <!-- Minden oszlop az Auto modell egy-egy tulajdonságához van kötve -->
+                <DataGridTextColumn Header="Azonosító" Binding="{Binding AutoId}" Width="80"/>
+                <DataGridTextColumn Header="Rendszám" Binding="{Binding Rendszam}" Width="110"/>
+                <DataGridTextColumn Header="Márka" Binding="{Binding Marka}" Width="130"/>
+                <DataGridTextColumn Header="Típus" Binding="{Binding Tipus}" Width="130"/>
+                <DataGridTextColumn Header="Évjárat" Binding="{Binding Evjarat}" Width="80"/>
+                <DataGridTextColumn Header="Napi ár (Ft)" Binding="{Binding NapiAr}" Width="110"/>
+                <DataGridCheckBoxColumn Header="Elérhető" Binding="{Binding Elerheto}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- ============================================================ -->
+        <!-- ADATBEVITELI ŰRLAP: Autó adatainak bevitele/módosítása       -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Autó adatai" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Első sor: Rendszám és Márka -->
+                <TextBlock Text="Rendszám:" Grid.Row="0" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="rendszamTextBox" Grid.Row="0" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="10"/>
+
+                <TextBlock Text="Márka:" Grid.Row="0" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="markaTextBox" Grid.Row="0" Grid.Column="3"
+                         Margin="0,0,0,5" MaxLength="50"/>
+
+                <!-- Második sor: Típus és Évjárat -->
+                <TextBlock Text="Típus:" Grid.Row="1" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="tipusTextBox" Grid.Row="1" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="50"/>
+
+                <TextBlock Text="Évjárat:" Grid.Row="1" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="evjaratTextBox" Grid.Row="1" Grid.Column="3"
+                         Margin="0,0,0,5" MaxLength="4"/>
+
+                <!-- Harmadik sor: Napi ár és Elérhető -->
+                <TextBlock Text="Napi ár (Ft):" Grid.Row="2" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="napiArTextBox" Grid.Row="2" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="10"/>
+
+                <TextBlock Text="Elérhető:" Grid.Row="2" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <CheckBox Name="elerhetoCheckBox" Grid.Row="2" Grid.Column="3"
+                          VerticalAlignment="Center" Margin="5,0,0,5" IsChecked="True"/>
+
+                <!-- Negyedik sor: CRUD műveleti gombok -->
+                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
+                            Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="0,10,0,0">
+                    <Button Content="Új hozzáadása" Click="HozzaadasGomb_Click"/>
+                    <Button Content="Módosítás" Click="ModositasGomb_Click"/>
+                    <Button Content="Törlés" Click="TorlesGomb_Click"/>
+                    <Button Content="Mezők törlése" Click="MezokTorleseGomb_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

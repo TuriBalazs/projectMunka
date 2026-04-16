@@ -1,0 +1,42 @@
+<!--
+    App.xaml - Az alkalmazás fő erőforrás-fájlja.
+    Itt definiáljuk a globális stílusokat és az indulási ablakot (StartupUri).
+    Az alkalmazás a MainWindow.xaml ablakkal indul.
+-->
+<Application x:Class="AutoKolcsonzo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Globális stílus a gombok egységes megjelenéséhez -->
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="MinWidth" Value="100"/>
+        </Style>
+
+        <!-- Globális stílus a szövegmezőkhöz -->
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <!-- Globális stílus a legördülő listákhoz -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <!-- Globális stílus a dátumválasztókhoz -->
+        <Style TargetType="DatePicker">
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+
+        <!-- Globális stílus a csoportkeretekhez -->
+        <Style TargetType="GroupBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Kimeneti típus: Windows alkalmazás -->
+    <OutputType>WinExe</OutputType>
+    <!-- Célkeretrendszer: .NET 8 Windows -->
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <!-- WPF használat engedélyezése -->
+    <UseWPF>true</UseWPF>
+    <!-- Gyökér névtér -->
+    <RootNamespace>AutoKolcsonzo</RootNamespace>
+    <!-- Összeállítás neve -->
+    <AssemblyName>AutoKolcsonzo</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MS SQL Server adatbázis-kezelő csomag -->
+    <PackageReference Include="Azure.Identity" Version="1.19.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
+  </ItemGroup>
+
+</Project>

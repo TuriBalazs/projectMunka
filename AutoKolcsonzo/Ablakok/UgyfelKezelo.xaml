@@ -1,0 +1,123 @@
+<!--
+    UgyfelKezelo.xaml - Az ügyfelek kezelésére szolgáló ablak.
+    Felépítése:
+    - Felső rész: Keresés sáv (mező kiválasztás, keresőszöveg, gombok)
+    - Középső rész: DataGrid az ügyfelek listájával
+    - Alsó rész: Adatbeviteli űrlap és CRUD gombok
+    A felhasználó itt tud ügyfeleket hozzáadni, módosítani, törölni és keresni.
+-->
+<Window x:Class="AutoKolcsonzo.Ablakok.UgyfelKezelo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ügyfelek kezelése"
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid Margin="10">
+        <!-- Három fő sor: keresés, táblázat, űrlap -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============================================================ -->
+        <!-- KERESÉS SÁV: Szűrés mező és szöveg alapján                  -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Keresés" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <!-- Keresési mező kiválasztása -->
+                <TextBlock Text="Keresés mezője:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox Name="keresesiMezoComboBox" Width="160">
+                    <ComboBoxItem Content="Név" Tag="Nev" IsSelected="True"/>
+                    <ComboBoxItem Content="E-mail" Tag="Email"/>
+                    <ComboBoxItem Content="Telefonszám" Tag="Telefonszam"/>
+                    <ComboBoxItem Content="Személyi ig. szám" Tag="SzemelyiIgazolvanySzam"/>
+                </ComboBox>
+
+                <!-- Keresőszöveg beviteli mező -->
+                <TextBlock Text="Keresőszöveg:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <TextBox Name="keresoszovegTextBox" Width="200"/>
+
+                <!-- Keresés és visszaállítás gombok -->
+                <Button Content="Keresés" Click="KeresesGomb_Click" MinWidth="80"/>
+                <Button Content="Összes mutatása" Click="OsszesGomb_Click" MinWidth="110"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- ============================================================ -->
+        <!-- ADATTÁBLÁZAT: Az ügyfelek listájának megjelenítése           -->
+        <!-- ============================================================ -->
+        <DataGrid Name="ugyfelekDataGrid" Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="UgyfelekDataGrid_SelectionChanged"
+                  Margin="0,5,0,5"
+                  AlternatingRowBackground="#F5F5F5"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <!-- Minden oszlop az Ugyfel modell egy-egy tulajdonságához van kötve -->
+                <DataGridTextColumn Header="Azonosító" Binding="{Binding UgyfelId}" Width="80"/>
+                <DataGridTextColumn Header="Név" Binding="{Binding Nev}" Width="180"/>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding Email}" Width="200"/>
+                <DataGridTextColumn Header="Telefonszám" Binding="{Binding Telefonszam}" Width="150"/>
+                <DataGridTextColumn Header="Személyi ig. szám" Binding="{Binding SzemelyiIgazolvanySzam}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- ============================================================ -->
+        <!-- ADATBEVITELI ŰRLAP: Ügyfél adatainak bevitele/módosítása     -->
+        <!-- ============================================================ -->
+        <GroupBox Header="Ügyfél adatai" Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Első sor: Név és E-mail -->
+                <TextBlock Text="Név:" Grid.Row="0" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="nevTextBox" Grid.Row="0" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="100"/>
+
+                <TextBlock Text="E-mail:" Grid.Row="0" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="emailTextBox" Grid.Row="0" Grid.Column="3"
+                         Margin="0,0,0,5" MaxLength="100"/>
+
+                <!-- Második sor: Telefonszám és Személyi ig. szám -->
+                <TextBlock Text="Telefonszám:" Grid.Row="1" Grid.Column="0"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="telefonszamTextBox" Grid.Row="1" Grid.Column="1"
+                         Margin="0,0,15,5" MaxLength="20"/>
+
+                <TextBlock Text="Személyi ig. szám:" Grid.Row="1" Grid.Column="2"
+                           VerticalAlignment="Center" Margin="0,0,5,5"/>
+                <TextBox Name="szemelyiIgazolvanySzamTextBox" Grid.Row="1" Grid.Column="3"
+                         Margin="0,0,0,5" MaxLength="20"/>
+
+                <!-- Harmadik sor: CRUD műveleti gombok -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                            Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="0,10,0,0">
+                    <Button Content="Új hozzáadása" Click="HozzaadasGomb_Click"/>
+                    <Button Content="Módosítás" Click="ModositasGomb_Click"/>
+                    <Button Content="Törlés" Click="TorlesGomb_Click"/>
+                    <Button Content="Mezők törlése" Click="MezokTorleseGomb_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
